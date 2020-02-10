@@ -2,3 +2,6 @@
 ## OS X Finder
 .DS_Store
 **/.DS_Store
+
+## Xcode
+xcuserdata/
