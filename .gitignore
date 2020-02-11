@@ -5,3 +5,11 @@
 
 ## Xcode
 xcuserdata/
+
+## Vapor
+Packages
+.build/
+*.xcodeproj
+DerivedData/
+.swiftpm
+db.sqlite
