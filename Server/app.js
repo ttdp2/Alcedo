@@ -1,10 +1,12 @@
 const express = require("express")
 const app = express()
 
-app.get("/", function(req, res) {
+let db = require("./database.js")
+
+app.get("/", (req, res) => {
     res.send("Welcome to Alcedo!")
 })
 
-app.listen("7000", function() {
-    console.log("Alcedo listening on port 7000...")
+app.listen("8000", () => {
+    console.log("Express listening on port 8000...")
 })
