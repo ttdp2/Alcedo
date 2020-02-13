@@ -8,7 +8,7 @@ xcuserdata/
 
 ## Vapor
 Packages
-.build/
+.build
 *.xcodeproj
 DerivedData/
 .swiftpm

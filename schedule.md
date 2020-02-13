@@ -1,4 +1,4 @@
-# Alcedo Development Schedule
+# Alcedo Schedule
 
 ## Week 1
 Feb, 10 - Feb, 14
