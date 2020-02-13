@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  Alcedo
+//  AlcedoApp
 //
-//  Created by Tian Tong on 2020/2/10.
+//  Created by Tian Tong on 2020/2/13.
 //  Copyright © 2020 TTDP. All rights reserved.
 //
 

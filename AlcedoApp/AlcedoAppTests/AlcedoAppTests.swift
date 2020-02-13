@@ -1,15 +1,15 @@
 //
-//  AlcedoTests.swift
-//  AlcedoTests
+//  AlcedoAppTests.swift
+//  AlcedoAppTests
 //
-//  Created by Tian Tong on 2020/2/10.
+//  Created by Tian Tong on 2020/2/13.
 //  Copyright © 2020 TTDP. All rights reserved.
 //
 
 import XCTest
-@testable import Alcedo
+@testable import AlcedoApp
 
-class AlcedoTests: XCTestCase {
+class AlcedoAppTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
