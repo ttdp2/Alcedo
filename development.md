@@ -7,21 +7,21 @@
 
 ## Models
 
+### Category
+```go
+struct Category {
+    "id": Int
+    "title": String
+    "services": [Service]
+}
+```
+
 ### Service
 ```go
 struct Service {
     "id": Int
     "name": String
     "teams": [Team]
-}
-```
-
-### LandingCard
-```go
-struct LandingCard {
-    "id": Int
-    "title": String
-    "services": [Service]
 }
 ```
 
