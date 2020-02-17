@@ -42,3 +42,12 @@ struct User {
     "email": String
 }
 ```
+
+## Web APIs
+
+| Name | HTTP | Path | Parameters |
+|------|------|------|------------|
+| **Categories index** | GET | /categories | <br> |
+| **Services index** | GET | /services | <br> |
+| **Teams index** | GET | /teams | <br> |
+| **Users index** | GET | /users | <br> |

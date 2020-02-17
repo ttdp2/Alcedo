@@ -10,8 +10,16 @@ Feb, 10 - Feb, 14
 
 ## Week 2
 Feb, 17 - Feb, 21
-- Monday: 在线客服APP服务端开发
-- Tuesday: 在线客服APP服务端开发
-- Wednesday: 在线客服APP苹果端开发
-- Thursday: 在线客服APP苹果端开发
-- Friday: 在线客服APP苹果端开发
+- Monday: 在线客服APP服务端开发-CRUD Routes
+- Tuesday: 在线客服APP服务端开发-Service Dispatch
+- Wednesday: 在线客服APP服务端开发-Service Logic Part 1
+- Thursday: 在线客服APP服务端开发-Service Logic Part 2
+- Friday: 在线客服APP服务端开发-Dialog Configuration
+
+## Week 2
+Feb, 24 - Feb, 28
+- Monday: 在线客服APP iOS端开发
+- Tuesday: 在线客服APP iOS端开发
+- Wednesday: 在线客服APP iOS端开发
+- Thursday: 在线客服APP iOS端开发
+- Friday: 在线客服APP iOS端开发
