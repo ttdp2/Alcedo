@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ChatView: View {
+struct ChatView2: View {
     @State var typingMessage: String = ""
     @EnvironmentObject var chatHelper: ChatHelper
     @ObservedObject private var keyboard = KeyboardResponder()
@@ -52,9 +52,9 @@ struct ChatView: View {
     
 }
 
-struct ChatView_Previews: PreviewProvider {
+struct ChatView2_Previews: PreviewProvider {
     static var previews: some View {
-        ChatView()
+        ChatView2()
     }
 }
 
