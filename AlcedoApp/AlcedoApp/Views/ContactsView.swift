@@ -10,12 +10,14 @@ import SwiftUI
 
 struct ContactsView: View {
     
-    @State private var items: [ContactRow.ContactItem] = [
-    .init(contact: Contact(id: "0", name: "Some Name", avatar: nil, isOnline: true), lastMessage: "This is my last message that I sent you", unread: true),
-        
-    .init(contact: Contact(id: "1", name: "Other Name", avatar: nil, isOnline: false), lastMessage: "This is my last message that I sent you", unread: false),
+    @EnvironmentObject private var store: AppStore
     
-    .init(contact: Contact(id: "2", name: "Third Name", avatar: nil, isOnline: true), lastMessage: "This is my last message that I sent you", unread: false),
+    @State private var items: [ContactRow.ContactItem] = [
+        .init(contact: Contact(id: "0", name: "Some Name", avatar: nil, isOnline: true), lastMessage: "This is my last message that I sent you", unread: true),
+        
+        .init(contact: Contact(id: "1", name: "Other Name", avatar: nil, isOnline: false), lastMessage: "This is my last message that I sent you", unread: false),
+        
+        .init(contact: Contact(id: "2", name: "Third Name", avatar: nil, isOnline: true), lastMessage: "This is my last message that I sent you", unread: false),
     ]
     
     init() {
@@ -26,10 +28,20 @@ struct ContactsView: View {
     var body: some View {
         List {
             ForEach(0..<items.count, id: \.self) { i in
-                ContactRow(item: self.items[i])
+                
+                ZStack {
+                    ContactRow(item: self.items[i])
+                    
+                    self.store.state.currentUser.map { currentUser in
+                        NavigationLink(destination: ChatView(currentUser: currentUser, receiver: self.items[i].contact)) {
+                            EmptyView()
+                        }
+                    }
+                }
+                    
+                .background(Color.white)
                 .listRowInsets(EdgeInsets())
-                    .background(Color.white)
-                    .shadow(color: i == self.items.count - 1 ? Color(UIColor.black.withAlphaComponent(0.08)) : Color.clear, radius: 10, x: 0, y: 2)
+                .shadow(color: i == self.items.count - 1 ? Color(UIColor.black.withAlphaComponent(0.08)) : Color.clear, radius: 10, x: 0, y: 2)
             }
         }
         .navigationBarTitle("Contacts", displayMode: .inline)
@@ -40,6 +52,6 @@ struct ContactsView: View {
 struct ContactsView_Previews: PreviewProvider {
     static var previews: some View {
         ContactsView()
-        .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
     }
 }

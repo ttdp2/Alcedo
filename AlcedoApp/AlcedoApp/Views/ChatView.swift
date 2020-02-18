@@ -10,8 +10,12 @@ import SwiftUI
 
 struct ChatView: View {
     
+    @ObservedObject private var keyboardObserver = KeyboardObserver()
+    
     let currentUser: Contact
     let receiver: Contact
+    
+    @State var count = 0
     
     @State private var messages: [Message] = [
         Message(id: 0, text: "Morbi scelerisque luctus velit", contact: Contact(id: "id", name: "Name", avatar: nil, isOnline: true)),
@@ -49,10 +53,18 @@ struct ChatView: View {
                                 trailing: 12))
                     }
                 }
+                .onTapGesture {
+                    self.endEditing()
+                }
                 
                 ChatTextField(sendAction: onSendTapped)
+                    .padding(.bottom, keyboardObserver.keyboardHeight)
+                    .animation(.easeInOut(duration: 0.3))
             }
+            .edgesIgnoringSafeArea(keyboardObserver.keyboardHeight == 0.0 ? .leading: .bottom)
+            
         }
+        .navigationBarTitle(Text(receiver.name), displayMode: .inline)
     }
     
     private func isMessageLastFromContact(at index: Int) -> Bool {

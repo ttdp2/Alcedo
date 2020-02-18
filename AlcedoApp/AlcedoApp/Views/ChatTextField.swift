@@ -39,7 +39,6 @@ struct ChatTextField: View {
                 }
             }
             .padding([.leading, .trailing])
-            .background(Color.white)
         }
         .frame(height: 60)
     }
