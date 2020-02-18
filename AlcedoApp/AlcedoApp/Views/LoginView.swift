@@ -10,39 +10,50 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @State var email = ""
-    @State var password = ""
-    @State var error: String?
+    @State private var email = ""
+    @State private var showContacts = false
     
     var body: some View {
-        NavigationView {
-            VStack {
-                TextField("Email", text: $email, onCommit: validate)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.emailAddress)
-                
-                SecureField("Password", text: $password, onCommit: validate)
-                    .padding()
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                Button(action: login) {
-                    Text("Sign in")
-                }.disabled(error != nil)
-                
-                error.flatMap {
-                    Text("Error: \($0)").foregroundColor(.red)
-                }
-            }.navigationBarTitle("Log in")
+        VStack(alignment: .leading, spacing: 26) {
+            
+            Text("Log in")
+                .modifier(TitleText())
+            
+            ErrorTextField(
+                title: "Email",
+                placeholder: "mail@example.com",
+                iconName: "email",
+                text: $email,
+                isValid: isValid)
+            
+            Spacer()
+            
+            Button(action: login) {
+                PrimaryButton(title: "Log In")
+            }
+            
+            NavigationLink(destination: ContactsView(), isActive: $showContacts) {
+                EmptyView()
+            }
         }
+        .padding()
     }
     
-    func validate() {
-        
+    private func isValid(email: String) -> Bool {
+        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with: email)
     }
     
-    func login() {
-        
+    private func login() {
+        showContacts = true
     }
     
+}
+
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView()
+        .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+    }
 }

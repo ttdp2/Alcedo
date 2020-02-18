@@ -11,15 +11,11 @@ import SwiftUI
 struct WelcomeView: View {
     
     var body: some View {
-        
         VStack(alignment: .leading) {
-            Text("Create an account")
-                .modifier(BodyText())
-                .padding()
-            
             Text("Connect with people around the world")
                 .modifier(TitleText())
-                .padding([.bottom, .leading, .trailing])
+                .padding([.bottom, .trailing])
+                .padding(.leading, 20)
             
             VStack(alignment: .center) {
                 Image("welcome")
@@ -38,9 +34,10 @@ struct WelcomeView: View {
             }
             
             VStack(spacing: 30) {
-                Button(action: {}) {
+                NavigationLink(destination: LoginView()) {
                     PrimaryButton(title: "Log In")
                 }
+                .navigationBarTitle("Log In")
                 
                 Button(action: {}) {
                     SecondaryButton(title: "Sign Up")
@@ -51,7 +48,7 @@ struct WelcomeView: View {
             
             Spacer()
         }
-        
+        .navigationBarTitle("Create an account")
     }
     
 }
