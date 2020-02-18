@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MessageView: View {
-    var message: Message
+    var message: Message2
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 15) {
@@ -29,6 +29,6 @@ struct MessageView: View {
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageView(message: Message(content: "Welcome to Alcedo, this is an message application. Enjoy it!", user: User(name: "Hello", avatar: "")))
+        MessageView(message: Message2(content: "Welcome to Alcedo, this is an message application. Enjoy it!", user: User(name: "Hello", avatar: "")))
     }
 }

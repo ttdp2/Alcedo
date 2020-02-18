@@ -13,7 +13,7 @@ class ChatHelper: ObservableObject {
     var didChange = PassthroughSubject<Void, Never>()
     @Published var realTimeMessages = DataSource.messages
     
-    func sendMessage(_ chatMessage: Message) {
+    func sendMessage(_ chatMessage: Message2) {
         realTimeMessages.append(chatMessage)
         didChange.send()
     }

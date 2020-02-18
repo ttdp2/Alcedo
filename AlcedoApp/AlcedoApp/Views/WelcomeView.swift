@@ -15,7 +15,8 @@ struct WelcomeView: View {
             Text("Connect with people around the world")
                 .modifier(TitleText())
                 .padding([.bottom, .trailing])
-                .padding(.leading, 20)
+                .padding(.leading, 20
+            )
             
             VStack(alignment: .center) {
                 Image("welcome")

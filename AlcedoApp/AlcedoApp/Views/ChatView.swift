@@ -46,7 +46,7 @@ struct ChatView: View {
     }
     
     func sendMessage() {
-        chatHelper.sendMessage(Message(content: typingMessage, user: DataSource.secondUser))
+        chatHelper.sendMessage(Message2(content: typingMessage, user: DataSource.secondUser))
         typingMessage = ""
     }
     

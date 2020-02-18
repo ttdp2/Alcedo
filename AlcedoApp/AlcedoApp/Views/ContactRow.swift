@@ -13,6 +13,20 @@ private struct AvatarView: View {
     let url: URL?
     let isOnline: Bool
     
+    private let showsOnlineStatus: Bool
+    
+    init(url: URL?, isOnline: Bool) {
+        self.url = url
+        self.isOnline = isOnline
+        showsOnlineStatus = true
+    }
+    
+    init(url: URL?) {
+        self.url = url
+        isOnline = false
+        showsOnlineStatus = false
+    }
+    
     var body: some View {
         ZStack {
             
@@ -20,10 +34,12 @@ private struct AvatarView: View {
                 .resizable()
                 .frame(width: 37, height: 37)
             
-            Circle()
-                .frame(width: 10, height: 10)
-                .foregroundColor(isOnline ? .green : .gray)
-                .padding([.leading, .top], 25)
+            if showsOnlineStatus {
+                Circle()
+                    .frame(width: 10, height: 10)
+                    .foregroundColor(isOnline ? .green : .gray)
+                    .padding([.leading, .top], 25)
+            }
         }
     }
     

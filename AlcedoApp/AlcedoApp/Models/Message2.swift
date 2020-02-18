@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Message: Hashable, Identifiable {
+struct Message2: Hashable, Identifiable {
     var content: String
     var user: User
     
