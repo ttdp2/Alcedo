@@ -8,43 +8,6 @@
 
 import SwiftUI
 
-private struct AvatarView: View {
-    
-    let url: URL?
-    let isOnline: Bool
-    
-    private let showsOnlineStatus: Bool
-    
-    init(url: URL?, isOnline: Bool) {
-        self.url = url
-        self.isOnline = isOnline
-        showsOnlineStatus = true
-    }
-    
-    init(url: URL?) {
-        self.url = url
-        isOnline = false
-        showsOnlineStatus = false
-    }
-    
-    var body: some View {
-        ZStack {
-            
-            Image("profile0")
-                .resizable()
-                .frame(width: 37, height: 37)
-            
-            if showsOnlineStatus {
-                Circle()
-                    .frame(width: 10, height: 10)
-                    .foregroundColor(isOnline ? .green : .gray)
-                    .padding([.leading, .top], 25)
-            }
-        }
-    }
-    
-}
-
 struct ContactRow: View {
     
     struct ContactItem: Identifiable {
@@ -97,12 +60,9 @@ struct ContactRow: View {
     
 }
 
-struct AvatarView_Previews: PreviewProvider {
+struct Contact_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            AvatarView(url: nil, isOnline: true)
-                .previewLayout(.fixed(width: 100, height: 100))
-            
             ContactRow(item: ContactRow.ContactItem(contact: Contact(id: "0", name: "Some Name", avatar: nil, isOnline: true), lastMessage: "Last message is a pretty big message", unread: true))
                 .previewLayout(.fixed(width: 300, height: 67))
             
