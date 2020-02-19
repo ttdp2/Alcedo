@@ -74,7 +74,16 @@ struct ChatView: View {
     }
     
     private func onSendTapped(message: String) {
+        let urlSession = URLSession(configuration: .default)
+        let webSocketTask = urlSession.webSocketTask(with: URL(string: "ws://127.0.0.1:8080/alcedo")!)
+        webSocketTask.resume()
         
+        let message = URLSessionWebSocketTask.Message.string("Hello, Alcedo!")
+        webSocketTask.send(message) { error in
+            if let error = error {
+                print("Web Socket Error: \(error.localizedDescription)")
+            }
+        }
     }
     
 }
