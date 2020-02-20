@@ -59,9 +59,9 @@ struct ChatView: View {
                 
                 ChatTextField(sendAction: onSendTapped)
                     .padding(.bottom, keyboardObserver.keyboardHeight)
-                    .animation(.easeInOut(duration: 0.3))
             }
             .edgesIgnoringSafeArea(keyboardObserver.keyboardHeight == 0.0 ? .leading: .bottom)
+            .animation(.easeInOut(duration: 0.3))
             
         }
         .navigationBarTitle(Text(receiver.name), displayMode: .inline)

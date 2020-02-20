@@ -4,6 +4,7 @@
 - Custom landing page
 - Separated supporting teams
 - Automatic services
+- Server and client could talk to each other
 
 ## Models
 

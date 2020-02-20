@@ -8,9 +8,8 @@
 import Vapor
 
 func sockets(_ app: Application) throws {
-    app.webSocket("alcedo") { (request, socket) in
-        socket.onText { (ws, text) in
-            print(text)
-        }
-    }
+    let chatController = ChatController()
+    app.webSocket("channel", "a", onUpgrade: chatController.channelA)
+    app.webSocket("channel", "b", onUpgrade: chatController.channelB)
+    app.webSocket("channel", "c", onUpgrade: chatController.channelC)
 }
