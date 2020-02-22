@@ -21,9 +21,9 @@ class WebSocket: NSObject, URLSessionWebSocketDelegate {
     
     init(url: URL) {
         super.init()
-//        webSocketTask = URLSession.shared.webSocketTask(with: url)
-//        webSocketTask.resume()
-//        listen()
+        webSocketTask = URLSession.shared.webSocketTask(with: url)
+        webSocketTask.resume()
+        listen()
         print("WebSocket init")
     }
     
@@ -63,7 +63,7 @@ class WebSocket: NSObject, URLSessionWebSocketDelegate {
                 case .data(let data):
                     self.delegate?.webSocket(ws: self, didReceive: data)
                 @unknown default:
-                    print("Unknow mesasge type...")
+                    print("Unknow mesasge type")
                 }
                 
             }

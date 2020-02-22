@@ -29,7 +29,7 @@ struct ChatingView: View {
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
-        //        webSocket.delegate = self
+        webSocket.delegate = self
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -81,8 +81,11 @@ struct ChatingView: View {
     }
     
     private func sendTapped(text: String) {
+        tweets.append(TextTweet(text: text, role: me))
         webSocket.send(text: text)
         endEditing()
+        
+        print(tweets.count)
     }
     
 }
@@ -91,7 +94,11 @@ extension ChatingView: WebSocketDelegate {
     
     func webSocket(ws: WebSocket, didReceive text: String) {
         print(text)
-        tweets.append(TextTweet(text: text, role: bot))
+        
+        DispatchQueue.main.async {
+            self.tweets.append(TextTweet(text: text, role: bot))
+            print(self.tweets.count)
+        }
     }
     
     func webSocket(ws: WebSocket, didReceive data: Data) {}
