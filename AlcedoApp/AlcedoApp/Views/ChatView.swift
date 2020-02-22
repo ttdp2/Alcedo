@@ -95,7 +95,7 @@ struct ChatView_Previews: PreviewProvider {
             currentUser: Contact(id: "me", name: "Me", avatar: nil, isOnline: true),
             receiver: Contact(id: "other", name: "Other", avatar: nil, isOnline: true)
         )
-            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+            .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
     
 }

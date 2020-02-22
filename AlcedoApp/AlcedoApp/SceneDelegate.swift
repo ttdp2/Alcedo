@@ -22,14 +22,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Create the SwiftUI view that provides the window contents.
         
-        let welcomeView = NavigationView {
-            WelcomeView()
-        }.environmentObject(store)
+//        let welcomeView = NavigationView {
+//            WelcomeView()
+//        }.environmentObject(store)
+        
+        let chatingView = ChatingView()
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: welcomeView)
+            window.rootViewController = UIHostingController(rootView: chatingView)
             self.window = window
             window.makeKeyAndVisible()
         }
