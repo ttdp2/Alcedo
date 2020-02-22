@@ -12,10 +12,13 @@ struct LandingView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
-            PrimaryButton(title: "Primary  机票服务")
+            NavigationLink(destination: ChatingView()) {
+                PrimaryButton(title: "Primary  机票服务")
+            }
             SecondaryButton(title: "Secondary  会员服务")
         }
         .padding()
+        .navigationBarTitle("在线客服 💁🏻‍♀️💁‍♂️")
     }
     
 }
@@ -23,8 +26,11 @@ struct LandingView: View {
 struct LandingView_Previews: PreviewProvider {
     
     static var previews: some View {
-        LandingView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+        NavigationView {
+            LandingView()
+        }
+        .navigationBarTitle("在线客服 💁🏻‍♀️💁‍♂️")
+        .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
     
 }

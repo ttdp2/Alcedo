@@ -26,12 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            WelcomeView()
 //        }.environmentObject(store)
         
-        let chatingView = ChatingView()
+        let landingView = NavigationView { LandingView() }
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: chatingView)
+            window.rootViewController = UIHostingController(rootView: landingView)
             self.window = window
             window.makeKeyAndVisible()
         }
