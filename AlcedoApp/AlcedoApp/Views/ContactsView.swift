@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContactsView: View {
     
-    @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var store: AppStore2
     
     @State private var items: [ContactRow.ContactItem] = [
         .init(contact: Contact(id: "0", name: "Some Name", avatar: nil, isOnline: true), lastMessage: "This is my last message that I sent you", unread: true),

@@ -14,22 +14,17 @@ struct ChatingView: View {
     
     @State var text: String = ""
     
-    @State var tweets = [TextTweet(text: "In to am attended desirous raptures declared diverted confined at.", role: bot),
-                         TextTweet(text: "Collected instantly remaining up certainly to necessary as.", role: bot),
-                         TextTweet(text: "Is handsome an declared at received in extended vicinity subjects.", role: me),
-                         TextTweet(text: "Into miss on he over been late pain an. Only week bore boy what fat case left use.", role: bot),
-                         TextTweet(text: "Your me past an much.", role: bot),
-                         TextTweet(text: "Match round scale now sex style far times.", role: me),
-                         TextTweet(text: "This is a tweet", role: me)]
+    @ObservedObject private var store = TweetStore()
     
-    let webSocket = WebSocket(url: URL(string: "ws://127.0.0.1:8080/bot")!)
+    let role: Role
     
-    init() {
+    init(role: Role) {
+        print("ChatingView init - \(role.name)")
+        self.role = role
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
-        webSocket.delegate = self
     }
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -51,8 +46,8 @@ struct ChatingView: View {
             
             VStack {
                 List {
-                    ForEach(0..<tweets.count, id: \.self) { i in
-                        TweetRow(tweet: self.tweets[i], isIncoming: self.tweets[i].role != me,
+                    ForEach(0 ..< store.tweets.count, id: \.self) { i in
+                        TweetRow(tweet: self.store.tweets[i], isIncoming: self.store.tweets[i].role != me,
                                  isLastFromContact: self.isMessageLastFromContact(at: i))
                             .listRowInsets(EdgeInsets(
                                 top: i == 0 ? 16 : 0,
@@ -75,40 +70,22 @@ struct ChatingView: View {
     }
     
     private func isMessageLastFromContact(at index: Int) -> Bool {
-        let tweet = tweets[index]
-        let next = index < tweets.count - 1 ? tweets[index + 1] : nil
+        let tweet = store.tweets[index]
+        let next = index < store.tweets.count - 1 ? store.tweets[index + 1] : nil
         return tweet.role != next?.role
     }
     
     private func sendTapped(text: String) {
-        tweets.append(TextTweet(text: text, role: me))
-        webSocket.send(text: text)
+        store.send(text)
         endEditing()
-        
-        print(tweets.count)
     }
-    
-}
-
-extension ChatingView: WebSocketDelegate {
-    
-    func webSocket(ws: WebSocket, didReceive text: String) {
-        print(text)
-        
-        DispatchQueue.main.async {
-            self.tweets.append(TextTweet(text: text, role: bot))
-            print(self.tweets.count)
-        }
-    }
-    
-    func webSocket(ws: WebSocket, didReceive data: Data) {}
     
 }
 
 struct Chating_Previews: PreviewProvider {
     
     static var previews: some View {
-        ChatingView()
+        ChatingView(role: me)
             .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
     

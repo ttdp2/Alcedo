@@ -16,7 +16,20 @@ func sockets(_ app: Application) throws {
     app.webSocket("bot") { req, ws in
         ws.onText { _, text in
             print(text)
-            ws.send("Hi, I am bot")
+            
+            let texts = ["Hi", "How are you?", "Cool"]
+            texts.forEach {
+                ws.send($0)
+            }
+        }
+    }
+    
+    app.webSocket("manual") { req, ws in
+        ws.onText { _, text in
+            print(text)
+            
+            let message = readLine()
+            ws.send(message ?? "Empty")
         }
     }
 }

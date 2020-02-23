@@ -12,13 +12,20 @@ struct LandingView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
-            NavigationLink(destination: ChatingView()) {
+            NavigationLink(destination: ChatingView(role: bot)) {
                 PrimaryButton(title: "Primary  机票服务")
             }
-            SecondaryButton(title: "Secondary  会员服务")
+            
+            NavigationLink(destination: ChatingView(role: service1)) {
+                SecondaryButton(title: "Secondary  会员服务")
+            }
         }
         .padding()
         .navigationBarTitle("在线客服 💁🏻‍♀️💁‍♂️")
+        .onAppear {
+            
+            
+        }
     }
     
 }

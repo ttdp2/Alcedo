@@ -1,5 +1,5 @@
 //
-//  AppStore.swift
+//  AppStore2.swift
 //  AlcedoApp
 //
 //  Created by Tian Tong on 2020/2/18.
@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-class AppStore: ObservableObject {
+class AppStore2: ObservableObject {
     
     struct AppStore {
         var currentUser: Contact?

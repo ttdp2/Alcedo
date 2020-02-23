@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @EnvironmentObject private var store: AppStore
+    @EnvironmentObject private var store: AppStore2
     
     @State private var email = ""
     @State private var showContacts = false

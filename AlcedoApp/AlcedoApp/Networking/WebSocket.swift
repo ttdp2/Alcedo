@@ -24,13 +24,8 @@ class WebSocket: NSObject, URLSessionWebSocketDelegate {
         webSocketTask = URLSession.shared.webSocketTask(with: url)
         webSocketTask.resume()
         listen()
-        print("WebSocket init")
     }
-    
-    deinit {
-        print("WebSocket deinit")
-    }
-    
+
     func send(text: String) {
         let message = URLSessionWebSocketTask.Message.string(text)
         webSocketTask.send(message) { error in
@@ -65,14 +60,9 @@ class WebSocket: NSObject, URLSessionWebSocketDelegate {
                 @unknown default:
                     print("Unknow mesasge type")
                 }
-                
+                self.listen()
             }
-            self.listen()
         }
-    }
-    
-    func close() {
-        webSocketTask.cancel()
     }
     
 }

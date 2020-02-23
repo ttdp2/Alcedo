@@ -7,3 +7,8 @@ let app = Application(env)
 defer { app.shutdown() }
 try configure(app)
 try app.run()
+
+
+/* kill [pid] used by 8080
+ lsof -i :8080
+ */
