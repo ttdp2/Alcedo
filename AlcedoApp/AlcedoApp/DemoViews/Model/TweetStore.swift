@@ -30,6 +30,8 @@ class TweetStore: ObservableObject, WebSocketDelegate {
     }
     
     func close() {
+        webSocket.send(data: "I AM QUIT.".data(using: .utf8)!)
+        webSocket.close()
         tweets.removeAll()
     }
     
