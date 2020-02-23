@@ -18,16 +18,21 @@ class HTTP {
         self.base = base
     }
     
-    func get(_ path: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    func get(_ path: String, completion: @escaping (Result<Data, Error>) throws -> Void)  {
         guard let url = URL(string: base + path) else { return }
         
         session.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
+            do {
+                if let error = error {
+                    try completion(.failure(error))
+                }
+                
+                if let data = data {
+                    try completion(.success(data))
+                }
             }
-        
-            if let data = data {
-                completion(.success(data))
+            catch (let error) {
+                print(error.localizedDescription)
             }
         }
         .resume()

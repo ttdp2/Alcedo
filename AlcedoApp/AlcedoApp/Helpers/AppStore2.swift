@@ -11,11 +11,11 @@ import Combine
 
 class AppStore2: ObservableObject {
     
-    struct AppStore {
+    struct AppStore2 {
         var currentUser: Contact?
     }
     
-    @Published private(set) var state = AppStore(currentUser: nil)
+    @Published private(set) var state = AppStore2(currentUser: nil)
     
     func setCurrentUser(_ user: Contact?) {
         state.currentUser = user

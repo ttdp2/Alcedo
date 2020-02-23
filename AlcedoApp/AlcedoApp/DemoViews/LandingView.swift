@@ -10,22 +10,33 @@ import SwiftUI
 
 struct LandingView: View {
     
+    @ObservedObject var model = AppStore()
+    
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
             NavigationLink(destination: ChatingView(role: bot)) {
                 PrimaryButton(title: "Primary  机票服务")
             }
-            
+
             NavigationLink(destination: ChatingView(role: service1)) {
                 SecondaryButton(title: "Secondary  会员服务")
             }
+            
+            /*
+            ForEach(model.categories, id: \.self) { category in
+                NavigationLink(destination: ChatingView(role: bot)) {
+                    PrimaryButton(title: category.title)
+                }
+            }
+            */
         }
         .padding()
         .navigationBarTitle("在线客服 💁🏻‍♀️💁‍♂️")
+        /*
         .onAppear {
-            
-            
+            self.model.loadLanding()
         }
+        */
     }
     
 }

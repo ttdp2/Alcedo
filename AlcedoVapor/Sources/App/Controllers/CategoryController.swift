@@ -11,11 +11,12 @@ import Fluent
 struct CategoryController {
     
     func index(req: Request) throws -> EventLoopFuture<[Category]> {
-        return Category.query(on: req.db).with(\.$services).all()
+        return Category.query(on: req.db).all()
     }
     
     func create(req: Request) throws -> EventLoopFuture<Category> {
         let category = try req.content.decode(Category.self)
         return category.create(on: req.db).map { category }
     }
+    
 }
