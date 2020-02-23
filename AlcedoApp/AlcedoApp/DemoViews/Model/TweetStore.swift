@@ -23,10 +23,14 @@ class TweetStore: ObservableObject, WebSocketDelegate {
     
     var webSocket: WebSocket!
     
-    init() {
-        print("TweetStore init")
-        webSocket = WebSocket(url: URL(string: "ws://127.0.0.1:8080/bot")!)
+    func connect(_ url: URL) {
+        print("TweetStore connect to \(url)")
+        webSocket = WebSocket(url: url)
         webSocket.delegate = self
+    }
+    
+    func close() {
+        tweets.removeAll()
     }
     
     func send(_ text: String) {

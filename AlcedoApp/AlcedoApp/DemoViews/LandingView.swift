@@ -14,12 +14,12 @@ struct LandingView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
-            NavigationLink(destination: ChatingView(role: bot)) {
-                PrimaryButton(title: "Primary  机票服务")
+            NavigationLink(destination: ChatingView(service: .ticket(URL(string: "ws://127.0.0.1:8080/ticket")!))) {
+                PrimaryButton(title: "TICKET  机票服务")
             }
 
-            NavigationLink(destination: ChatingView(role: service1)) {
-                SecondaryButton(title: "Secondary  会员服务")
+            NavigationLink(destination: ChatingView(service: .member(URL(string: "ws://127.0.0.1:8080/member")!))) {
+                SecondaryButton(title: "MEMBER  会员服务")
             }
             
             /*
@@ -31,7 +31,7 @@ struct LandingView: View {
             */
         }
         .padding()
-        .navigationBarTitle("在线客服 💁🏻‍♀️💁‍♂️")
+        .navigationBarTitle("欢迎使用在线客服 💁🏻‍♀️💁‍♂️")
         /*
         .onAppear {
             self.model.loadLanding()

@@ -11,16 +11,12 @@ import SwiftUI
 struct ChatingView: View {
     
     @ObservedObject private var keyboardObserver = KeyboardObserver()
-    
-    @State var text: String = ""
-    
     @ObservedObject private var store = TweetStore()
     
-    let role: Role
+    let service: ServiceEnum
     
-    init(role: Role) {
-        print("ChatingView init - \(role.name)")
-        self.role = role
+    init(service: ServiceEnum) {
+        self.service = service
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
@@ -48,12 +44,15 @@ struct ChatingView: View {
                 List {
                     ForEach(0 ..< store.tweets.count, id: \.self) { i in
                         TweetRow(tweet: self.store.tweets[i], isIncoming: self.store.tweets[i].role != me,
-                                 isLastFromContact: self.isMessageLastFromContact(at: i))
+                                 isLastFromContact: self.isLastTweet(at: i))
                             .listRowInsets(EdgeInsets(
                                 top: i == 0 ? 16 : 0,
                                 leading: 12,
-                                bottom: self.isMessageLastFromContact(at: i) ? 20 : 6,
+                                bottom: self.isLastTweet(at: i) ? 20 : 6,
                                 trailing: 12))
+                            .onTapGesture {
+                                print(index)
+                        }
                     }
                 }
                 .onTapGesture {
@@ -66,10 +65,25 @@ struct ChatingView: View {
             .edgesIgnoringSafeArea(keyboardObserver.keyboardHeight == 0.0 ? .leading: .bottom)
             .animation(.easeInOut(duration: 0.3))
         }
-        .navigationBarTitle(Text("Bot Service"), displayMode: .inline)
+        .navigationBarTitle(service.isTicket ? Text("机票服务") : Text("会员服务"), displayMode: .inline)
+        .onAppear(perform: startTweets)
+        .onDisappear(perform: closeTweets)
     }
     
-    private func isMessageLastFromContact(at index: Int) -> Bool {
+    private func startTweets() {
+        switch service {
+        case .ticket(let url):
+            store.connect(url)
+        case .member(let url):
+            store.connect(url)
+        }
+    }
+    
+    private func closeTweets() {
+        store.close()
+    }
+    
+    private func isLastTweet(at index: Int) -> Bool {
         let tweet = store.tweets[index]
         let next = index < store.tweets.count - 1 ? store.tweets[index + 1] : nil
         return tweet.role != next?.role
@@ -85,7 +99,7 @@ struct ChatingView: View {
 struct Chating_Previews: PreviewProvider {
     
     static var previews: some View {
-        ChatingView(role: me)
+        ChatingView(service: .member(URL(string: "ws://example.com")!))
             .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
     

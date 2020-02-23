@@ -9,6 +9,22 @@
 import Foundation
 import Combine
 
+enum ServiceEnum {
+    case ticket(URL)
+    case member(URL)
+}
+
+extension ServiceEnum {
+    var isTicket: Bool {
+        switch self {
+        case .ticket(_):
+            return true
+        case .member(_):
+            return false
+        }
+    }
+}
+
 class AppStore: ObservableObject {
     
     let http = HTTP(base: "http://127.0.0.1:8080/")
