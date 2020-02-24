@@ -9,7 +9,7 @@ xcuserdata/
 ## Vapor
 Packages
 .build
-*.xcodeproj
+AlcedoVapor.xcodeproj
 DerivedData/
 .swiftpm
 db.sqlite
