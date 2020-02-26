@@ -1,5 +1,5 @@
 //
-//  TweetRow.swift
+//  TextRow.swift
 //  AlcedoApp
 //
 //  Created by Tian Tong on 2020/2/22.
@@ -8,12 +8,11 @@
 
 import SwiftUI
 
-struct TweetRow: View {
+struct TextRow: View {
     
-    let tweet: TextTweet
+    let tweet: Tweet
     let isIncoming: Bool
-    
-    let isLastFromContact: Bool
+    let isLast: Bool
     
     private var chatBubble: some View {
         RoundedRectangle(cornerRadius: 6)
@@ -32,7 +31,7 @@ struct TweetRow: View {
     var body: some View {
         HStack(alignment: .bottom, spacing: 0) {
             if isIncoming {
-                if isLastFromContact {
+                if isLast {
                     RoleView(icon: tweet.role.icon)
                     chatBubbleTriange(width: 15, height: 14, isIncoming: true)
                 } else {
@@ -48,7 +47,7 @@ struct TweetRow: View {
                 
                 text
                 
-                if isLastFromContact {
+                if isLast {
                     chatBubbleTriange(width: 15, height: 14, isIncoming: false)
                     RoleView(icon: tweet.role.icon)
                 } else {
@@ -56,6 +55,11 @@ struct TweetRow: View {
                 }
             }
         }
+        .onTapGesture(perform: tapEvent)
+    }
+    
+    private func tapEvent() {
+        print("Here")
     }
     
     private func chatBubbleTriange(width: CGFloat, height: CGFloat, isIncoming: Bool) -> some View {
@@ -81,16 +85,16 @@ struct TweetRow_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            TweetRow(tweet: TextTweet(text: "This is a tweet from user role.", role: Role(name: "User", icon: "profile0")), isIncoming: false, isLastFromContact: true)
+            TextRow(tweet: Tweet(text: "This is a tweet from user role.", role: Role(name: "User", icon: "profile0")), isIncoming: false, isLast: true)
             .previewLayout(.fixed(width: 300, height: 200))
             
-            TweetRow(tweet: TextTweet(text: "This is a tweet from bot role.", role: Role(name: "Bot", icon: "role_bot")), isIncoming: true, isLastFromContact: true)
+            TextRow(tweet: Tweet(text: "This is a tweet from bot role.", role: Role(name: "Bot", icon: "role_bot")), isIncoming: true, isLast: true)
             .previewLayout(.fixed(width: 300, height: 200))
             
-            TweetRow(tweet: TextTweet(text: "This is a tweet from female role.", role: Role(name: "Female", icon: "role_female")), isIncoming: true, isLastFromContact: true)
+            TextRow(tweet: Tweet(text: "This is a tweet from female role.", role: Role(name: "Female", icon: "role_female")), isIncoming: true, isLast: true)
             .previewLayout(.fixed(width: 300, height: 200))
             
-            TweetRow(tweet: TextTweet(text: "This is a tweet from male role.", role: Role(name: "Male", icon: "role_male")), isIncoming: true, isLastFromContact: true)
+            TextRow(tweet: Tweet(text: "This is a tweet from male role.", role: Role(name: "Male", icon: "role_male")), isIncoming: true, isLast: true)
             .previewLayout(.fixed(width: 300, height: 200))
         }
     }

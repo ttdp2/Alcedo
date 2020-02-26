@@ -43,8 +43,7 @@ struct ChatingView: View {
             VStack {
                 List {
                     ForEach(0 ..< store.tweets.count, id: \.self) { i in
-                        TweetRow(tweet: self.store.tweets[i], isIncoming: self.store.tweets[i].role != me,
-                                 isLastFromContact: self.isLastTweet(at: i))
+                        self.buildView(at: i)
                             .listRowInsets(EdgeInsets(
                                 top: i == 0 ? 16 : 0,
                                 leading: 12,
@@ -68,6 +67,20 @@ struct ChatingView: View {
         .navigationBarTitle(service.isTicket ? Text("机票服务") : Text("会员服务"), displayMode: .inline)
         .onAppear(perform: startTweets)
         .onDisappear(perform: closeTweets)
+    }
+    
+    private func buildView(at index: Int) -> AnyView {
+        let tweet = store.tweets[index]
+        let isIncoming = tweet.role != me
+        let isLast = isLastTweet(at: index)
+        
+        switch tweet.type {
+        case .text:
+            return AnyView(TextRow(tweet: tweet, isIncoming: isIncoming, isLast: isLast))
+        case .flight:
+            return AnyView(FlightRow(tweet: tweet, isIncoming: isIncoming, isLast: isLast))
+        }
+
     }
     
     private func startTweets() {

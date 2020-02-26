@@ -8,10 +8,20 @@
 
 import Foundation
 
-protocol Tweet {}
+enum Type {
+    case text
+    case flight
+}
 
-struct TextTweet: Tweet, Identifiable {
-    var id = UUID()
-    var text: String
-    var role: Role
+struct Tweet: Identifiable {
+    let id = UUID()
+    let text: String
+    let role: Role
+    let type: Type
+    
+    init(text: String, role: Role, type: Type = .text) {
+        self.text = text
+        self.role = role
+        self.type = type
+    }
 }

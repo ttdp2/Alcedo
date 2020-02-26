@@ -31,7 +31,7 @@ struct LandingView: View {
             */
         }
         .padding()
-        .navigationBarTitle("欢迎使用在线客服 💁🏻‍♀️💁‍♂️")
+        .navigationBarTitle("在线客服 💁🏻‍♀️💁‍♂️")
         /*
         .onAppear {
             self.model.loadLanding()

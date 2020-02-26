@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7117B74924021A2E007EA8BE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7117B74824021A2E007EA8BE /* Category.swift */; };
+		7119C4202405FD0100D3AF4C /* FlightRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119C41F2405FD0100D3AF4C /* FlightRow.swift */; };
 		7127E18823FA56B9003C97A1 /* Message2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7127E18723FA56B9003C97A1 /* Message2.swift */; };
 		7127E18A23FA56E1003C97A1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7127E18923FA56E1003C97A1 /* User.swift */; };
 		7127E18D23FA5785003C97A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7127E18C23FA5785003C97A1 /* ContentView.swift */; };
@@ -36,7 +37,7 @@
 		715902F42400A9E700724172 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902F32400A9E700724172 /* Tweet.swift */; };
 		715902F62400B06E00724172 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902F52400B06E00724172 /* Role.swift */; };
 		715902FA2400CF7000724172 /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902F92400CF7000724172 /* TextInputView.swift */; };
-		715902FC2400D48100724172 /* TweetRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902FB2400D48100724172 /* TweetRow.swift */; };
+		715902FC2400D48100724172 /* TextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902FB2400D48100724172 /* TextRow.swift */; };
 		715903002401039B00724172 /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902FF2401039B00724172 /* RoleView.swift */; };
 		7159030524011A3C00724172 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159030424011A3C00724172 /* WebSocket.swift */; };
 		7159030724011A4300724172 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159030624011A4300724172 /* HTTP.swift */; };
@@ -74,6 +75,7 @@
 
 /* Begin PBXFileReference section */
 		7117B74824021A2E007EA8BE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		7119C41F2405FD0100D3AF4C /* FlightRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightRow.swift; sourceTree = "<group>"; };
 		7127E18723FA56B9003C97A1 /* Message2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message2.swift; sourceTree = "<group>"; };
 		7127E18923FA56E1003C97A1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7127E18C23FA5785003C97A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,7 +110,7 @@
 		715902F32400A9E700724172 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		715902F52400B06E00724172 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		715902F92400CF7000724172 /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
-		715902FB2400D48100724172 /* TweetRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetRow.swift; sourceTree = "<group>"; };
+		715902FB2400D48100724172 /* TextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRow.swift; sourceTree = "<group>"; };
 		715902FF2401039B00724172 /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
 		7159030424011A3C00724172 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		7159030624011A4300724172 /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
@@ -284,7 +286,8 @@
 			children = (
 				715902EE24009B4B00724172 /* LandingView.swift */,
 				715902F02400A51800724172 /* ChatingView.swift */,
-				715902FB2400D48100724172 /* TweetRow.swift */,
+				715902FB2400D48100724172 /* TextRow.swift */,
+				7119C41F2405FD0100D3AF4C /* FlightRow.swift */,
 				715902FF2401039B00724172 /* RoleView.swift */,
 				715902F92400CF7000724172 /* TextInputView.swift */,
 				715902F22400A9CE00724172 /* Model */,
@@ -478,7 +481,7 @@
 				71FE6BA123FBC8690042F400 /* ChatView.swift in Sources */,
 				71341294240153ED00E8E5BE /* TweetStore.swift in Sources */,
 				71FE6BAC23FC07C90042F400 /* Spacer+Extension.swift in Sources */,
-				715902FC2400D48100724172 /* TweetRow.swift in Sources */,
+				715902FC2400D48100724172 /* TextRow.swift in Sources */,
 				7127E19123FA58FC003C97A1 /* ChatView2.swift in Sources */,
 				715902F62400B06E00724172 /* Role.swift in Sources */,
 				71FE6BA523FBDA4D0042F400 /* KeyboardObserver.swift in Sources */,
@@ -491,6 +494,7 @@
 				7159030724011A4300724172 /* HTTP.swift in Sources */,
 				7127E18823FA56B9003C97A1 /* Message2.swift in Sources */,
 				71313EF723F5250D002955E4 /* SceneDelegate.swift in Sources */,
+				7119C4202405FD0100D3AF4C /* FlightRow.swift in Sources */,
 				71FE6BAA23FC04F70042F400 /* View+Extension.swift in Sources */,
 				71FE6B9F23FBC49B0042F400 /* ChatTextField.swift in Sources */,
 				715902FA2400CF7000724172 /* TextInputView.swift in Sources */,
