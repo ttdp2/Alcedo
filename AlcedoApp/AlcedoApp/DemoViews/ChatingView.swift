@@ -73,14 +73,16 @@ struct ChatingView: View {
         let tweet = store.tweets[index]
         let isIncoming = tweet.role != me
         let isLast = isLastTweet(at: index)
-        
-        switch tweet.type {
-        case .text:
-            return AnyView(TextRow(tweet: tweet, isIncoming: isIncoming, isLast: isLast))
-        case .flight:
-            return AnyView(FlightRow(tweet: tweet, isIncoming: isIncoming, isLast: isLast))
-        }
 
+        if let textTweet = tweet as? TextTweet {
+            return AnyView(TextRow(tweet: textTweet, isIncoming: isIncoming, isLast: isLast))
+        }
+        
+        if let flightTweet = tweet as? FlightTweet {
+            return AnyView(FlightRow(tweet: flightTweet, isIncoming: isIncoming, isLast: isLast))
+        }
+        
+        return AnyView(EmptyView())
     }
     
     private func startTweets() {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FlightRow: View {
     
-    let tweet: Tweet
+    let tweet: FlightTweet
     let isIncoming: Bool
     let isLast: Bool
     
@@ -23,7 +23,21 @@ struct FlightRow: View {
     private var flight: some View {
         VStack {
             
-            Text(tweet.text)
+            HStack {
+                Text("2019-9-19")
+                Spacer()
+                Text("MU521")
+            }
+            .background(Color.cometChatBlue)
+            .foregroundColor(.white)
+            
+            HStack {
+                Text("Shanghai")
+                Spacer()
+                Text("Beijing")
+            }
+            
+            Text(tweet.flightNo)
                 .padding(.bottom, 5)
             HStack {
                 Spacer()
@@ -35,7 +49,7 @@ struct FlightRow: View {
         .foregroundColor(isIncoming ? .body : .white)
         .modifier(BodyText())
         .background(chatBubble)
-        .frame(maxWidth: 200)
+        .frame(maxWidth: 250)
     }
     
     var body: some View {

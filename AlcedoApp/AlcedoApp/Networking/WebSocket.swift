@@ -44,6 +44,10 @@ class WebSocket: NSObject, URLSessionWebSocketDelegate {
         }
     }
     
+    func close() {
+        webSocketTask.cancel()
+    }
+    
     private func listen() {
         webSocketTask.receive { [weak self] result in
             guard let self = self else { return }

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TextRow: View {
     
-    let tweet: Tweet
+    let tweet: TextTweet
     let isIncoming: Bool
     let isLast: Bool
     
@@ -85,16 +85,16 @@ struct TweetRow_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            TextRow(tweet: Tweet(text: "This is a tweet from user role.", role: Role(name: "User", icon: "profile0")), isIncoming: false, isLast: true)
+            TextRow(tweet: TextTweet(text: "This is a tweet from user role.", role: Role(name: "User", icon: "profile0")), isIncoming: false, isLast: true)
             .previewLayout(.fixed(width: 300, height: 200))
             
-            TextRow(tweet: Tweet(text: "This is a tweet from bot role.", role: Role(name: "Bot", icon: "role_bot")), isIncoming: true, isLast: true)
+            TextRow(tweet: TextTweet(text: "This is a tweet from bot role.", role: Role(name: "Bot", icon: "role_bot")), isIncoming: true, isLast: true)
             .previewLayout(.fixed(width: 300, height: 200))
             
-            TextRow(tweet: Tweet(text: "This is a tweet from female role.", role: Role(name: "Female", icon: "role_female")), isIncoming: true, isLast: true)
+            TextRow(tweet: TextTweet(text: "This is a tweet from female role.", role: Role(name: "Female", icon: "role_female")), isIncoming: true, isLast: true)
             .previewLayout(.fixed(width: 300, height: 200))
             
-            TextRow(tweet: Tweet(text: "This is a tweet from male role.", role: Role(name: "Male", icon: "role_male")), isIncoming: true, isLast: true)
+            TextRow(tweet: TextTweet(text: "This is a tweet from male role.", role: Role(name: "Male", icon: "role_male")), isIncoming: true, isLast: true)
             .previewLayout(.fixed(width: 300, height: 200))
         }
     }

@@ -34,13 +34,14 @@
 		71341294240153ED00E8E5BE /* TweetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71341293240153ED00E8E5BE /* TweetStore.swift */; };
 		715902EF24009B4B00724172 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902EE24009B4B00724172 /* LandingView.swift */; };
 		715902F12400A51800724172 /* ChatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902F02400A51800724172 /* ChatingView.swift */; };
-		715902F42400A9E700724172 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902F32400A9E700724172 /* Tweet.swift */; };
+		715902F42400A9E700724172 /* TextTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902F32400A9E700724172 /* TextTweet.swift */; };
 		715902F62400B06E00724172 /* Role.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902F52400B06E00724172 /* Role.swift */; };
 		715902FA2400CF7000724172 /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902F92400CF7000724172 /* TextInputView.swift */; };
 		715902FC2400D48100724172 /* TextRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902FB2400D48100724172 /* TextRow.swift */; };
 		715903002401039B00724172 /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715902FF2401039B00724172 /* RoleView.swift */; };
 		7159030524011A3C00724172 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159030424011A3C00724172 /* WebSocket.swift */; };
 		7159030724011A4300724172 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159030624011A4300724172 /* HTTP.swift */; };
+		71691F07240767670084400A /* FlightTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71691F06240767670084400A /* FlightTweet.swift */; };
 		71A91929240216570005C749 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A91928240216570005C749 /* AppStore.swift */; };
 		71FE6B9323FB96DD0042F400 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FE6B9223FB96DD0042F400 /* ContactsView.swift */; };
 		71FE6B9523FBA5190042F400 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FE6B9423FBA5190042F400 /* Contact.swift */; };
@@ -107,13 +108,14 @@
 		71341293240153ED00E8E5BE /* TweetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetStore.swift; sourceTree = "<group>"; };
 		715902EE24009B4B00724172 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		715902F02400A51800724172 /* ChatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatingView.swift; sourceTree = "<group>"; };
-		715902F32400A9E700724172 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		715902F32400A9E700724172 /* TextTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTweet.swift; sourceTree = "<group>"; };
 		715902F52400B06E00724172 /* Role.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Role.swift; sourceTree = "<group>"; };
 		715902F92400CF7000724172 /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
 		715902FB2400D48100724172 /* TextRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRow.swift; sourceTree = "<group>"; };
 		715902FF2401039B00724172 /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
 		7159030424011A3C00724172 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		7159030624011A4300724172 /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
+		71691F06240767670084400A /* FlightTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTweet.swift; sourceTree = "<group>"; };
 		71A91928240216570005C749 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		71FE6B9223FB96DD0042F400 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
 		71FE6B9423FBA5190042F400 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -290,21 +292,22 @@
 				7119C41F2405FD0100D3AF4C /* FlightRow.swift */,
 				715902FF2401039B00724172 /* RoleView.swift */,
 				715902F92400CF7000724172 /* TextInputView.swift */,
-				715902F22400A9CE00724172 /* Model */,
+				715902F22400A9CE00724172 /* Models */,
 			);
 			path = DemoViews;
 			sourceTree = "<group>";
 		};
-		715902F22400A9CE00724172 /* Model */ = {
+		715902F22400A9CE00724172 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				71A91928240216570005C749 /* AppStore.swift */,
 				71341293240153ED00E8E5BE /* TweetStore.swift */,
-				715902F32400A9E700724172 /* Tweet.swift */,
+				715902F32400A9E700724172 /* TextTweet.swift */,
+				71691F06240767670084400A /* FlightTweet.swift */,
 				715902F52400B06E00724172 /* Role.swift */,
 				7117B74824021A2E007EA8BE /* Category.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7159030324011A2F00724172 /* Networking */ = {
@@ -463,7 +466,7 @@
 				715902F12400A51800724172 /* ChatingView.swift in Sources */,
 				71313EF523F5250D002955E4 /* AppDelegate.swift in Sources */,
 				7127E19823FA8124003C97A1 /* KeyboardResponder.swift in Sources */,
-				715902F42400A9E700724172 /* Tweet.swift in Sources */,
+				715902F42400A9E700724172 /* TextTweet.swift in Sources */,
 				715902EF24009B4B00724172 /* LandingView.swift in Sources */,
 				7117B74924021A2E007EA8BE /* Category.swift in Sources */,
 				71FE6B9923FBB71A0042F400 /* Message.swift in Sources */,
@@ -493,6 +496,7 @@
 				71FE6B9323FB96DD0042F400 /* ContactsView.swift in Sources */,
 				7159030724011A4300724172 /* HTTP.swift in Sources */,
 				7127E18823FA56B9003C97A1 /* Message2.swift in Sources */,
+				71691F07240767670084400A /* FlightTweet.swift in Sources */,
 				71313EF723F5250D002955E4 /* SceneDelegate.swift in Sources */,
 				7119C4202405FD0100D3AF4C /* FlightRow.swift in Sources */,
 				71FE6BAA23FC04F70042F400 /* View+Extension.swift in Sources */,

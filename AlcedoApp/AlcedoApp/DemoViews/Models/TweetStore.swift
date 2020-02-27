@@ -10,8 +10,8 @@ import Foundation
 
 class TweetStore: ObservableObject, WebSocketDelegate {
     
-    @Published var tweets: [Tweet] = [Tweet(text: "This is a text tweet", role: me, type: .text),
-                                      Tweet(text: "This is a flight tweet", role: bot, type: .flight)]
+    @Published var tweets: [Tweetable] = [TextTweet(text: "This is a text tweet", role: me, type: .text),
+                                      TextTweet(text: "This is a flight tweet", role: bot, type: .flight)]
     /*
     [Tweet(text: "In to am attended desirous raptures declared diverted confined at.", role: bot),
     Tweet(text: "Collected instantly remaining up certainly to necessary as.", role: bot),
@@ -32,11 +32,12 @@ class TweetStore: ObservableObject, WebSocketDelegate {
     
     func close() {
         webSocket.send(data: "I AM QUIT.".data(using: .utf8)!)
+        webSocket.close()
         tweets.removeAll()
     }
     
     func send(_ text: String) {
-        let tweet = Tweet(text: text, role: me)
+        let tweet = TextTweet(text: text, role: me)
         tweets.append(tweet)
         
         webSocket.send(text: text)
@@ -44,13 +45,22 @@ class TweetStore: ObservableObject, WebSocketDelegate {
     
     func webSocket(ws: WebSocket, didReceive text: String) {
         DispatchQueue.main.async {
-            let tweet = Tweet(text: text, role: service2)
+            let tweet = TextTweet(text: text, role: service2)
             self.tweets.append(tweet)
         }
     }
     
     func webSocket(ws: WebSocket, didReceive data: Data) {
-        // No content
+        guard let flights = try? JSONDecoder().decode([Flight].self, from: data) else {
+            print("Decode [Flight].self Error")
+            return
+        }
+        
+        let flightTweets = flights.map { FlightTweet(flight: $0, role: bot )}
+        
+        DispatchQueue.main.async {
+            self.tweets += flightTweets
+        }
     }
     
 }

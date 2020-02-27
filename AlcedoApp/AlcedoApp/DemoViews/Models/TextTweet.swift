@@ -13,7 +13,12 @@ enum Type {
     case flight
 }
 
-struct Tweet: Identifiable {
+protocol Tweetable {
+    var id: UUID { get }
+    var role: Role { get }
+}
+
+struct TextTweet: Identifiable, Tweetable {
     let id = UUID()
     let text: String
     let role: Role
