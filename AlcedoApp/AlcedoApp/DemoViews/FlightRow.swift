@@ -10,9 +10,13 @@ import SwiftUI
 
 struct FlightRow: View {
     
+    
     let tweet: FlightTweet
     let isIncoming: Bool
     let isLast: Bool
+    
+    let index: Int
+    let store: TweetStore
     
     private var chatBubble: some View {
         RoundedRectangle(cornerRadius: 6)
@@ -82,7 +86,11 @@ struct FlightRow: View {
     }
     
     private func tapEvent() {
-        print("There")
+        guard let flightTweet = store.tweets[index] as? FlightTweet else {
+            return
+        }
+        
+        store.send(flightTweet.flightNo)
     }
     
     private func chatBubbleTriange(width: CGFloat, height: CGFloat, isIncoming: Bool) -> some View {

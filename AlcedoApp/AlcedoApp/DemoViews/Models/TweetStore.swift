@@ -11,7 +11,8 @@ import Foundation
 class TweetStore: ObservableObject, WebSocketDelegate {
     
     @Published var tweets: [Tweetable] = [TextTweet(text: "This is a text tweet", role: me, type: .text),
-                                      TextTweet(text: "This is a flight tweet", role: bot, type: .flight)]
+                                          TextTweet(text: "This is a flight tweet", role: bot, type: .flight),
+                                          DateTweet(role: bot)]
     /*
     [Tweet(text: "In to am attended desirous raptures declared diverted confined at.", role: bot),
     Tweet(text: "Collected instantly remaining up certainly to necessary as.", role: bot),
@@ -45,7 +46,7 @@ class TweetStore: ObservableObject, WebSocketDelegate {
     
     func webSocket(ws: WebSocket, didReceive text: String) {
         DispatchQueue.main.async {
-            let tweet = TextTweet(text: text, role: service2)
+            let tweet = TextTweet(text: text, role: bot)
             self.tweets.append(tweet)
         }
     }
@@ -56,7 +57,7 @@ class TweetStore: ObservableObject, WebSocketDelegate {
             return
         }
         
-        let flightTweets = flights.map { FlightTweet(flight: $0, role: bot )}
+        let flightTweets = flights.map { FlightTweet(flight: $0, role: bot) }
         
         DispatchQueue.main.async {
             self.tweets += flightTweets

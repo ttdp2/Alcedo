@@ -43,6 +43,7 @@
 		7159030724011A4300724172 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7159030624011A4300724172 /* HTTP.swift */; };
 		71691F07240767670084400A /* FlightTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71691F06240767670084400A /* FlightTweet.swift */; };
 		71A91929240216570005C749 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A91928240216570005C749 /* AppStore.swift */; };
+		71FB6EDF2407C31200372C78 /* DateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB6EDE2407C31200372C78 /* DateRow.swift */; };
 		71FE6B9323FB96DD0042F400 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FE6B9223FB96DD0042F400 /* ContactsView.swift */; };
 		71FE6B9523FBA5190042F400 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FE6B9423FBA5190042F400 /* Contact.swift */; };
 		71FE6B9723FBA5630042F400 /* ContactRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FE6B9623FBA5630042F400 /* ContactRow.swift */; };
@@ -117,6 +118,7 @@
 		7159030624011A4300724172 /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		71691F06240767670084400A /* FlightTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTweet.swift; sourceTree = "<group>"; };
 		71A91928240216570005C749 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		71FB6EDE2407C31200372C78 /* DateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRow.swift; sourceTree = "<group>"; };
 		71FE6B9223FB96DD0042F400 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
 		71FE6B9423FBA5190042F400 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		71FE6B9623FBA5630042F400 /* ContactRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactRow.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				715902EE24009B4B00724172 /* LandingView.swift */,
 				715902F02400A51800724172 /* ChatingView.swift */,
 				715902FB2400D48100724172 /* TextRow.swift */,
+				71FB6EDE2407C31200372C78 /* DateRow.swift */,
 				7119C41F2405FD0100D3AF4C /* FlightRow.swift */,
 				715902FF2401039B00724172 /* RoleView.swift */,
 				715902F92400CF7000724172 /* TextInputView.swift */,
@@ -469,6 +472,7 @@
 				715902F42400A9E700724172 /* TextTweet.swift in Sources */,
 				715902EF24009B4B00724172 /* LandingView.swift in Sources */,
 				7117B74924021A2E007EA8BE /* Category.swift in Sources */,
+				71FB6EDF2407C31200372C78 /* DateRow.swift in Sources */,
 				71FE6B9923FBB71A0042F400 /* Message.swift in Sources */,
 				7127E1A923FB78E7003C97A1 /* ErrorTextField.swift in Sources */,
 				7127E19623FA62A4003C97A1 /* DataSource.swift in Sources */,

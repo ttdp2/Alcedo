@@ -30,3 +30,8 @@ struct TextTweet: Identifiable, Tweetable {
         self.type = type
     }
 }
+
+struct DateTweet: Identifiable, Tweetable {
+    let id = UUID()
+    let role: Role
+}

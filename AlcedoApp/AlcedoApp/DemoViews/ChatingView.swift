@@ -49,9 +49,6 @@ struct ChatingView: View {
                                 leading: 12,
                                 bottom: self.isLastTweet(at: i) ? 20 : 6,
                                 trailing: 12))
-                            .onTapGesture {
-                                print(index)
-                        }
                     }
                 }
                 .onTapGesture {
@@ -79,7 +76,12 @@ struct ChatingView: View {
         }
         
         if let flightTweet = tweet as? FlightTweet {
-            return AnyView(FlightRow(tweet: flightTweet, isIncoming: isIncoming, isLast: isLast))
+            return AnyView(FlightRow(tweet: flightTweet, isIncoming: isIncoming, isLast: isLast, index: index, store: store))
+        }
+        
+        if let dateTweet = tweet as? DateTweet {
+            print(dateTweet)
+            return AnyView(DateRow(store: store))
         }
         
         return AnyView(EmptyView())
