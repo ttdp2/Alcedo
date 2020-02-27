@@ -67,7 +67,7 @@ class TicketController {
         }
         
         guard checkOption(text) else {
-            return "请回复序列号或回复人工，方可开始服务。"
+            return "请输入需要办理的业务序列号或回复人工"
         }
         
         guard checkIdCard(text) else {
