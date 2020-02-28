@@ -10,20 +10,10 @@ import Foundation
 
 class TweetStore: ObservableObject, WebSocketDelegate {
     
-    @Published var tweets: [Tweetable] = [TextTweet(text: "This is a text tweet", role: me),
-                                          TextTweet(text: "This is a flight tweet", role: bot),
-                                          DateTweet(text: "请选择改签的日期", role: bot)]
-    /*
-    [Tweet(text: "In to am attended desirous raptures declared diverted confined at.", role: bot),
-    Tweet(text: "Collected instantly remaining up certainly to necessary as.", role: bot),
-    Tweet(text: "Is handsome an declared at received in extended vicinity subjects.", role: me),
-    Tweet(text: "Into miss on he over been late pain an. Only week bore boy what fat case left use.", role: bot),
-    Tweet(text: "Your me past an much.", role: bot),
-    Tweet(text: "Match round scale now sex style far times.", role: me),
-    Tweet(text: "This is a tweet", role: me)]
-    */
-    
-    var webSocket: WebSocket!
+    @Published var tweets: [Tweetable] = []
+
+    private var webSocket: WebSocket!
+    private var serverRole: Role = bot
 
     func connect(_ url: URL) {
         print("TweetStore connect to \(url)")
@@ -41,6 +31,12 @@ class TweetStore: ObservableObject, WebSocketDelegate {
         let tweet = TextTweet(text: text, role: me)
         tweets.append(tweet)
         
+        if text == "人工" {
+            serverRole = male
+        } else if text == "Bot" {
+            serverRole = bot
+        }
+        
         webSocket.send(text: text)
     }
     
@@ -48,9 +44,9 @@ class TweetStore: ObservableObject, WebSocketDelegate {
         DispatchQueue.main.async {
             let tweet: Tweetable
             if text == "DatePicker" {
-                tweet = DateTweet(text: "请选择您要改签的日期", role: bot)
+                tweet = DateTweet(text: "请选择您要改签的日期", role: self.serverRole)
             } else {
-                tweet = TextTweet(text: text, role: bot)
+                tweet = TextTweet(text: text, role: self.serverRole)
             }
             self.tweets.append(tweet)
         }
@@ -62,7 +58,7 @@ class TweetStore: ObservableObject, WebSocketDelegate {
             return
         }
         
-        let flightTweets = flights.map { FlightTweet(flight: $0, role: bot) }
+        let flightTweets = flights.map { FlightTweet(flight: $0, role: self.serverRole) }
         
         DispatchQueue.main.async {
             self.tweets += flightTweets

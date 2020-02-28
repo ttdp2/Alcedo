@@ -24,7 +24,7 @@ struct LandingView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
-            NavigationLink(destination: ChatingView(service: .ticket(URL(string: "ws://127.0.0.1:8080/ticket")!))) {
+            NavigationLink(destination: ChatingView(service: .ticket(URL(string: "ws://127.0.0.1:8080/flight")!))) {
                 PrimaryButton(title: "TICKET  机票服务")
             }
 
