@@ -8,6 +8,16 @@
 
 import SwiftUI
 
+struct MyView: View {
+    @State var count = 0
+    
+    var body: some View {
+        Button (action: {
+            self.count += 1
+        }, label: { Text("Tap me!") })
+    }
+}
+
 struct LandingView: View {
     
     @ObservedObject var model = AppStore()

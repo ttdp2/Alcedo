@@ -10,9 +10,11 @@ import SwiftUI
 
 struct DateRow: View {
     
-    let store: TweetStore
+    let tweet: DateTweet
+    let isIncoming: Bool
+    let isLast: Bool
     
-    let isIncoming = true
+    let store: TweetStore
     
     private var chatBubble: some View {
         RoundedRectangle(cornerRadius: 6)
@@ -20,14 +22,48 @@ struct DateRow: View {
             .shadow(color: .shadow, radius: 2, x: 0, y: 1)
     }
     
+    private var date: some View {
+        VStack {
+            Image("calendar")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 60, height: 60)
+            Text(tweet.text)
+        }
+        .padding(10)
+        .foregroundColor(isIncoming ? .body : .white)
+        .modifier(BodyText())
+        .background(chatBubble)
+    }
+    
     var body: some View {
-         Text("click me")
-            .onTapGesture(perform: tapEvent)
-            .padding(10)
-            .foregroundColor(isIncoming ? .body : .white)
-            .modifier(BodyText())
-            .background(chatBubble)
-            .frame(maxWidth: 250)
+        HStack(alignment: .bottom, spacing: 0) {
+            if isIncoming {
+                if isLast {
+                    RoleView(icon: tweet.role.icon)
+                    chatBubbleTriange(width: 15, height: 14, isIncoming: true)
+                } else {
+                    Spacer().frame(width: 61)
+                }
+                
+                date
+                
+                Spacer()
+            } else {
+                
+                Spacer()
+                
+                date
+                
+                if isLast {
+                    chatBubbleTriange(width: 15, height: 14, isIncoming: false)
+                    RoleView(icon: tweet.role.icon)
+                } else {
+                    Spacer().frame(width: 61)
+                }
+            }
+        }
+        .onTapGesture(perform: tapEvent)
     }
     
     private func tapEvent() {
@@ -63,27 +99,27 @@ struct DateRow: View {
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
         showAlert(alert: alert)
     }
-
+    
     private func showAlert(alert: UIAlertController) {
         if let controller = topMostViewController() {
             controller.present(alert, animated: true)
         }
     }
-
+    
     private func keyWindow() -> UIWindow? {
         return UIApplication.shared.connectedScenes
-        .filter {$0.activationState == .foregroundActive}
-        .compactMap {$0 as? UIWindowScene}
-        .first?.windows.filter {$0.isKeyWindow}.first
+            .filter {$0.activationState == .foregroundActive}
+            .compactMap {$0 as? UIWindowScene}
+            .first?.windows.filter {$0.isKeyWindow}.first
     }
-
+    
     private func topMostViewController() -> UIViewController? {
         guard let rootController = keyWindow()?.rootViewController else {
             return nil
         }
         return topMostViewController(for: rootController)
     }
-
+    
     private func topMostViewController(for controller: UIViewController) -> UIViewController {
         if let presentedController = controller.presentedViewController {
             return topMostViewController(for: presentedController)

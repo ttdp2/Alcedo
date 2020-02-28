@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum Type {
-    case text
-    case flight
-}
-
 protocol Tweetable {
     var id: UUID { get }
     var role: Role { get }
@@ -21,17 +16,5 @@ protocol Tweetable {
 struct TextTweet: Identifiable, Tweetable {
     let id = UUID()
     let text: String
-    let role: Role
-    let type: Type
-    
-    init(text: String, role: Role, type: Type = .text) {
-        self.text = text
-        self.role = role
-        self.type = type
-    }
-}
-
-struct DateTweet: Identifiable, Tweetable {
-    let id = UUID()
     let role: Role
 }

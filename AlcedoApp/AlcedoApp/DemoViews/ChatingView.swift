@@ -80,8 +80,7 @@ struct ChatingView: View {
         }
         
         if let dateTweet = tweet as? DateTweet {
-            print(dateTweet)
-            return AnyView(DateRow(store: store))
+            return AnyView(DateRow(tweet: dateTweet, isIncoming: isIncoming, isLast: isLast, store: store))
         }
         
         return AnyView(EmptyView())

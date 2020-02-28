@@ -10,9 +10,9 @@ import Foundation
 
 class TweetStore: ObservableObject, WebSocketDelegate {
     
-    @Published var tweets: [Tweetable] = [TextTweet(text: "This is a text tweet", role: me, type: .text),
-                                          TextTweet(text: "This is a flight tweet", role: bot, type: .flight),
-                                          DateTweet(role: bot)]
+    @Published var tweets: [Tweetable] = [TextTweet(text: "This is a text tweet", role: me),
+                                          TextTweet(text: "This is a flight tweet", role: bot),
+                                          DateTweet(text: "请选择改签的日期", role: bot)]
     /*
     [Tweet(text: "In to am attended desirous raptures declared diverted confined at.", role: bot),
     Tweet(text: "Collected instantly remaining up certainly to necessary as.", role: bot),
@@ -46,7 +46,12 @@ class TweetStore: ObservableObject, WebSocketDelegate {
     
     func webSocket(ws: WebSocket, didReceive text: String) {
         DispatchQueue.main.async {
-            let tweet = TextTweet(text: text, role: bot)
+            let tweet: Tweetable
+            if text == "DatePicker" {
+                tweet = DateTweet(text: "请选择您要改签的日期", role: bot)
+            } else {
+                tweet = TextTweet(text: text, role: bot)
+            }
             self.tweets.append(tweet)
         }
     }

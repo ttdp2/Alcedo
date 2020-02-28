@@ -35,6 +35,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+        
+        let view = MyView()
+        view.count = 10
+        print(view.count)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

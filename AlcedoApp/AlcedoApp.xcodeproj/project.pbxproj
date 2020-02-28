@@ -24,6 +24,7 @@
 		7127E1A323FAB168003C97A1 /* BodyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7127E1A223FAB168003C97A1 /* BodyText.swift */; };
 		7127E1A523FABAB4003C97A1 /* ButtonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7127E1A423FABAB4003C97A1 /* ButtonViews.swift */; };
 		7127E1A923FB78E7003C97A1 /* ErrorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7127E1A823FB78E7003C97A1 /* ErrorTextField.swift */; };
+		712A749C2408B68F003958AE /* DateTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712A749B2408B68F003958AE /* DateTweet.swift */; };
 		71313EF523F5250D002955E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71313EF423F5250D002955E4 /* AppDelegate.swift */; };
 		71313EF723F5250D002955E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71313EF623F5250D002955E4 /* SceneDelegate.swift */; };
 		71313EFB23F5250F002955E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71313EFA23F5250F002955E4 /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		7127E1A223FAB168003C97A1 /* BodyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyText.swift; sourceTree = "<group>"; };
 		7127E1A423FABAB4003C97A1 /* ButtonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViews.swift; sourceTree = "<group>"; };
 		7127E1A823FB78E7003C97A1 /* ErrorTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTextField.swift; sourceTree = "<group>"; };
+		712A749B2408B68F003958AE /* DateTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTweet.swift; sourceTree = "<group>"; };
 		71313EF123F5250D002955E4 /* AlcedoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlcedoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71313EF423F5250D002955E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71313EF623F5250D002955E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				71A91928240216570005C749 /* AppStore.swift */,
 				71341293240153ED00E8E5BE /* TweetStore.swift */,
 				715902F32400A9E700724172 /* TextTweet.swift */,
+				712A749B2408B68F003958AE /* DateTweet.swift */,
 				71691F06240767670084400A /* FlightTweet.swift */,
 				715902F52400B06E00724172 /* Role.swift */,
 				7117B74824021A2E007EA8BE /* Category.swift */,
@@ -467,6 +470,7 @@
 				7127E19C23FAAFB6003C97A1 /* Colors.swift in Sources */,
 				7127E18A23FA56E1003C97A1 /* User.swift in Sources */,
 				715902F12400A51800724172 /* ChatingView.swift in Sources */,
+				712A749C2408B68F003958AE /* DateTweet.swift in Sources */,
 				71313EF523F5250D002955E4 /* AppDelegate.swift in Sources */,
 				7127E19823FA8124003C97A1 /* KeyboardResponder.swift in Sources */,
 				715902F42400A9E700724172 /* TextTweet.swift in Sources */,
