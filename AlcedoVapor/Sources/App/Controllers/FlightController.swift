@@ -41,13 +41,36 @@ class FlightController {
     private var isNewFlightChecked = false
     private var isCompleted = false
     
+    private var isManualModel = false
+    
     func handleFlight(req: Request, ws: WebSocket) {
         ws.send(welcome)
         
         ws.onText { _, text in
             print("USER INPUT: \(text)")
             
-            self.process(text, webSocket: ws)
+            if self.isManualModel {
+                if text == "Bot" {
+                    self.isManualModel = false
+                    self.reset()
+                    ws.send(self.welcome)
+                    return
+                }
+                
+                guard let text = readLine() else {
+                    return
+                }
+                
+                ws.send(text)
+            } else {
+                if text == "人工" {
+                    self.isManualModel = true
+                    ws.send("很高兴为您服务，请问有什么可以帮助您的？")
+                    return
+                }
+                
+                self.process(text, webSocket: ws)
+            }
         }
         
         ws.onBinary { _, byte in
@@ -132,19 +155,15 @@ class FlightController {
         if isOptionChecked {
             return true
         } else {
-            if text == "人工" {
+            guard let number = Int(text) else {
+                return false
+            }
+            
+            switch number {
+            case 1, 2, 3, 4:
                 isOptionChecked = true
-            } else {
-                guard let number = Int(text) else {
-                    return false
-                }
-                
-                switch number {
-                case 1, 2, 3, 4:
-                    isOptionChecked = true
-                default:
-                    return false
-                }
+            default:
+                return false
             }
         }
         

@@ -13,9 +13,6 @@ func sockets(_ app: Application) throws {
     app.webSocket("channel", "b", onUpgrade: chatController.channelB)
     app.webSocket("channel", "c", onUpgrade: chatController.channelC)
     
-    let ticketController = TicketController()
-    app.webSocket("ticket", onUpgrade: ticketController.ticket)
-    
     app.webSocket("bot") { req, ws in
         ws.onText { _, text in
             print(text)
