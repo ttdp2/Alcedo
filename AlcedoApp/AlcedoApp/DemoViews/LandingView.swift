@@ -28,7 +28,7 @@ struct LandingView: View {
                 PrimaryButton(title: "TICKET  机票服务")
             }
 
-            NavigationLink(destination: ChatingView(service: .member(URL(string: "ws://127.0.0.1:8080/flight")!))) {
+            NavigationLink(destination: ChatingView(service: .member(URL(string: "ws://127.0.0.1:8080/member")!))) {
                 SecondaryButton(title: "MEMBER  会员服务")
             }
             

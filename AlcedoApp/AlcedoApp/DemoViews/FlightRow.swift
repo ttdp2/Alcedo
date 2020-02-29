@@ -15,7 +15,6 @@ struct FlightRow: View {
     let isIncoming: Bool
     let isLast: Bool
     
-    let index: Int
     let store: TweetStore
     
     private var chatBubble: some View {
@@ -24,36 +23,52 @@ struct FlightRow: View {
             .shadow(color: .shadow, radius: 2, x: 0, y: 1)
     }
     
-    private var flight: some View {
+    private var ticket: some View {
         VStack {
             
             HStack {
-                Text("2019-9-19")
+                Text(tweet.flightDate)
+                    .font(Font.subheadline)
                 Spacer()
-                Text("MU521")
+                Image("mu")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 16)
+                Text(tweet.flightNo)
+                    .font(Font.footnote.weight(.bold))
             }
-            .background(Color.cometChatBlue)
-            .foregroundColor(.white)
+            .padding(.bottom, -5)
+            
+            Divider()
             
             HStack {
-                Text("Shanghai")
+                Text(tweet.depCity)
+                    .font(Font.headline)
                 Spacer()
-                Text("Beijing")
+                Image("departure")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 16)
+                Spacer()
+                Text(tweet.arrCity)
+                    .font(Font.headline)
             }
             
-            Text(tweet.flightNo)
-                .padding(.bottom, 5)
             HStack {
+                Text(tweet.depTime)
+                    .font(Font.headline)
+                    .foregroundColor(.deepBlue)
                 Spacer()
-                Text("7: 30 - 9: 50")
-                Spacer()
+                Text(tweet.arrTime)
+                    .font(Font.headline)
+                    .foregroundColor(.deepBlue)
             }
         }
         .padding(10)
         .foregroundColor(isIncoming ? .body : .white)
         .modifier(BodyText())
         .background(chatBubble)
-        .frame(maxWidth: 250)
+        .frame(maxWidth: 230)
     }
     
     var body: some View {
@@ -66,14 +81,14 @@ struct FlightRow: View {
                     Spacer().frame(width: 61)
                 }
                 
-                flight
+                ticket
                 
                 Spacer()
             } else {
                 
                 Spacer()
                 
-                flight
+                ticket
                 
                 if isLast {
                     chatBubbleTriange(width: 15, height: 14, isIncoming: false)
@@ -86,11 +101,7 @@ struct FlightRow: View {
     }
     
     private func tapEvent() {
-        guard let flightTweet = store.tweets[index] as? FlightTweet else {
-            return
-        }
-        
-        store.send(flightTweet.flightNo)
+        store.send(tweet.flightNo)
     }
     
     private func chatBubbleTriange(width: CGFloat, height: CGFloat, isIncoming: Bool) -> some View {

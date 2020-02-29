@@ -10,7 +10,11 @@ import Foundation
 
 class TweetStore: ObservableObject, WebSocketDelegate {
     
-    @Published var tweets: [Tweetable] = []
+    @Published var tweets: [Tweetable] = [
+//        FlightTweet(flight: Flight(depCity: "上海虹桥", arrCity: "青岛流亭", depTime: "14:35", arrTime: "16:10", flightDate: "2020-03-01", flightNo: "MU5515"), role: bot),
+//        FlightTweet(flight: Flight(depCity: "青岛流亭", arrCity: "上海虹桥", depTime: "14:50", arrTime: "16:40", flightDate: "2020-03-05", flightNo: "MU5520"), role: bot),
+//        TextTweet(text: "Haha", role: bot)
+    ]
 
     private var webSocket: WebSocket!
     private var serverRole: Role = bot

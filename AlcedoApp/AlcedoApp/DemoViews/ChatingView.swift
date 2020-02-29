@@ -76,7 +76,7 @@ struct ChatingView: View {
         }
         
         if let flightTweet = tweet as? FlightTweet {
-            return AnyView(FlightRow(tweet: flightTweet, isIncoming: isIncoming, isLast: isLast, index: index, store: store))
+            return AnyView(FlightRow(tweet: flightTweet, isIncoming: isIncoming, isLast: isLast, store: store))
         }
         
         if let dateTweet = tweet as? DateTweet {

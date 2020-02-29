@@ -27,7 +27,7 @@ class FlightController {
     ]
     let bookedMessgae = "经查询您有以上未出行航班，请选择需要改签的，或回复航班号"
     
-    let availableFlights = [
+    var availableFlights = [
         Flight(depCity: "上海虹桥", arrCity: "青岛流亭", depTime: "14:35", arrTime: "16:10", flightDate: "2020-03-02", flightNo: "MU5515"),
         Flight(depCity: "上海虹桥", arrCity: "青岛流亭", depTime: "18:00", arrTime: "19:35", flightDate: "2020-03-02", flightNo: "MU5517"),
         Flight(depCity: "上海虹桥", arrCity: "青岛流亭", depTime: "21:15", arrTime: "22:55", flightDate: "2020-03-02", flightNo: "MU5519")
@@ -205,6 +205,9 @@ class FlightController {
             formatter.dateFormat = "yyyy-MM-dd"
             if let _ = formatter.date(from: text){
                 newDate = text
+                availableFlights = availableFlights.map {
+                    Flight(depCity: $0.depCity, arrCity: $0.arrCity, depTime: $0.depTime, arrTime: $0.arrTime, flightDate: newDate, flightNo: $0.flightNo)
+                }
                 isNewDateChecked = true
                 return true
             }
