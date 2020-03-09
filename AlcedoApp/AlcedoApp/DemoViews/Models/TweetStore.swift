@@ -57,15 +57,24 @@ class TweetStore: ObservableObject, WebSocketDelegate {
     }
     
     func webSocket(ws: WebSocket, didReceive data: Data) {
-        guard let flights = try? JSONDecoder().decode([Flight].self, from: data) else {
-            print("Decode [Flight].self Error")
-            return
-        }
-        
-        let flightTweets = flights.map { FlightTweet(flight: $0, role: self.serverRole) }
-        
-        DispatchQueue.main.async {
-            self.tweets += flightTweets
+        if let flight = try? JSONDecoder().decode(Flight.self, from: data) {
+           let tweet = FlightTweet(flight: flight, role: self.serverRole)
+            
+            DispatchQueue.main.async {
+                self.tweets.append(tweet)
+            }
+        } else {
+            
+            guard let flights = try? JSONDecoder().decode([Flight].self, from: data) else {
+                print("Decode [Flight].self Error")
+                return
+            }
+            
+            let flightTweets = flights.map { FlightTweet(flight: $0, role: self.serverRole) }
+            
+            DispatchQueue.main.async {
+                self.tweets += flightTweets
+            }
         }
     }
     

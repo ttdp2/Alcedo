@@ -24,7 +24,7 @@ struct LandingView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 50) {
-            NavigationLink(destination: ChatingView(service: .ticket(URL(string: "ws://127.0.0.1:8080/flight")!))) {
+            NavigationLink(destination: ChatingView(service: .ticket(URL(string: "ws://127.0.0.1:8080/flightChange")!))) {
                 PrimaryButton(title: "TICKET  机票服务")
             }
 
@@ -41,7 +41,7 @@ struct LandingView: View {
             */
         }
         .padding()
-        .navigationBarTitle("在线客服 💁🏻‍♀️💁‍♂️")
+        .navigationBarTitle("在线智能客服 💁🏻‍♀️💁‍♂️")
         /*
         .onAppear {
             self.model.loadLanding()
@@ -57,7 +57,7 @@ struct LandingView_Previews: PreviewProvider {
         NavigationView {
             LandingView()
         }
-        .navigationBarTitle("在线客服 💁🏻‍♀️💁‍♂️")
+        .navigationBarTitle("在线智能客服 💁🏻‍♀️💁‍♂️")
         .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
     

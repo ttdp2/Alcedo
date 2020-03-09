@@ -61,7 +61,7 @@ struct ChatingView: View {
             .edgesIgnoringSafeArea(keyboardObserver.keyboardHeight == 0.0 ? .leading: .bottom)
             .animation(.easeInOut(duration: 0.3))
         }
-        .navigationBarTitle(service.isTicket ? Text("机票服务") : Text("会员服务"), displayMode: .inline)
+        .navigationBarTitle(service.isTicket ? Text("改期服务") : Text("会员服务"), displayMode: .inline)
         .onAppear(perform: startTweets)
         .onDisappear(perform: closeTweets)
     }

@@ -1,20 +1,20 @@
 //
-//  FlightController.swift
+//  RefundController.swift
 //  App
 //
-//  Created by Tian Tong on 2020/2/23.
+//  Created by Tian Tong on 3/9/20.
 //
 
 import Vapor
 
-class FlightController {
+class RefundController {
     
     let welcome =
     """
         欢迎进入机票服务，以下业务可提供自助办理：
 
         1. 机票改签
-        2. 机票验真
+        2. 机票退票
         3. 机票行程单寄送
 
         回复对应序列号即可办理，如需人工服务，请回复人工。
@@ -33,17 +33,38 @@ class FlightController {
     ]
     let availableMessage = "经查询有以上航班可供改签，请选择，或回复航班号"
     
-    private var isOptionChecked = false
-    private var isIdCardChecked = false
-    private var isFlightChecked = false
-    private var isNewDateChecked = false
+    private var isOptionChecked = true
+    private var isUserInfoChecked = true
+    private var isBankCardChecked = false
+    private var isRefundInfoChecked = false
     private var isNewFlightChecked = false
     private var isCompleted = false
     
     private var isManualModel = false
     
-    func handleFlight(req: Request, ws: WebSocket) {
-        ws.send(welcome)
+    func handleRefund(req: Request, ws: WebSocket) {
+//        ws.send(welcome)
+        let userInfo =
+        """
+        旅客信息：
+        姓名：胡歌  票号：781-123456789
+        航班号：MU5111   联系方式：13912345678
+        起飞：上海虹桥   到达：北京首都
+        """
+        ws.send(userInfo)
+        
+        let chatHistory =
+        """
+        IVR意图：不正常航班退票
+        IVR聊天记录：
+        ---------------------------------------
+        AI：您好，我是小东，有什么能帮您的？
+        旅客：我的航班延误了，我要退票
+        AI：已识别您为不正常航班退票，您还未绑定银行卡，我们会发送短信给你，你可以在在线客服完成绑卡并退票。
+        """
+  
+        ws.send(chatHistory)
+        ws.send("系统检测到您还未绑定银行卡，请输入您要接受退款的银行卡号")
         
         ws.onText { _, text in
             print("USER INPUT: \(text)")
@@ -86,14 +107,11 @@ class FlightController {
     }
     
     func reset() {
-        isOptionChecked = false
-        isIdCardChecked = false
-        isFlightChecked = false
-        isNewDateChecked = false
-        isNewFlightChecked = false
-        flightNo = ""
-        newDate = ""
-        newFlight = ""
+        isOptionChecked = true
+        isUserInfoChecked = true
+        isBankCardChecked = false
+        isRefundInfoChecked = false
+        bankCard = ""
     }
     
     private func process(_ text: String, webSocket ws: WebSocket) {
@@ -109,41 +127,33 @@ class FlightController {
             return
         }
         
-        guard checkIdCard(text) else {
-            ws.send("请输入您的身份证号码")
+        guard checkBankCard(text) else {
+            ws.send("系统检测到您还未绑定银行卡，请输入您要接受退款的银行卡号")
             return
         }
         
-        guard checkFlight(text) else {
-            guard let data = try? JSONEncoder().encode(bookedFlights) else {
-                return
-            }
-            
-            ws.send(raw: data, opcode: .binary)
-            ws.send(bookedMessgae)
-            return
-        }
-        
-        guard checkNewDate(text) else {
-            ws.send("DatePicker")
-            return
-        }
-        
-        guard checkNewFlight(text) else {
-            guard let data = try? JSONEncoder().encode(availableFlights) else {
-                return
-            }
-            
-            ws.send(raw: data, opcode: .binary)
-            ws.send(availableMessage)
+        guard checkRefundInfo(text) else {
+            let refundInfo =
+            """
+            请确认您的退票信息：
+            航班日期：2020年3月15日
+            航班号：MU5111
+            客票号：781-123456789
+            出发城市：上海虹桥
+            到达城市：北京首都
+            退款金额：¥ 789.0
+            银行卡号：\(bankCard)
+            银行名称：招商银行
+            """
+            ws.send(refundInfo)
             return
         }
         
         ws.send("""
-                已为您改签成功，航班信息:
-                \(newDate)
-                \(newFlight)
-                祝您旅途愉快！
+                已为您退票成功，退款信息如下：
+                银行卡号：\(bankCard)
+                退款金额：¥ 789.0
+                期待您再次乘坐东方航空！
                 """)
 
         isCompleted = true
@@ -169,59 +179,38 @@ class FlightController {
         return true
     }
     
-    private func checkIdCard(_ text: String) -> Bool {
-        if isIdCardChecked {
+    private func checkUserInfo(_ text: String) -> Bool {
+        if isUserInfoChecked {
             return true
         } else {
-            if text.count == 18 && text.isNumber {
-                isIdCardChecked = true
+            if text == "确认" || text == "确定" || text == "是的" || text == "是" {
+                isUserInfoChecked = true
                 return true
             }
         }
         return false
     }
     
-    var flightNo = ""
-    private func checkFlight(_ text: String) -> Bool {
-        if isFlightChecked {
+    var bankCard = ""
+    private func checkBankCard(_ text: String) -> Bool {
+        if isBankCardChecked {
             return true
         } else {
-            if text == "MU5515" || text == "MU5520" {
-                flightNo = text
-                isFlightChecked = true
+            if text.count == 16 {
+                bankCard = text
+                isBankCardChecked = true
                 return true
             }
         }
         return false
     }
     
-    var newDate = ""
-    private func checkNewDate(_ text: String) -> Bool {
-        if isNewDateChecked {
+    private func checkRefundInfo(_ text: String) -> Bool {
+        if isRefundInfoChecked {
             return true
         } else {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            if let _ = formatter.date(from: text){
-                newDate = text
-                availableFlights = availableFlights.map {
-                    Flight(depCity: $0.depCity, arrCity: $0.arrCity, depTime: $0.depTime, arrTime: $0.arrTime, flightDate: newDate, flightNo: $0.flightNo)
-                }
-                isNewDateChecked = true
-                return true
-            }
-        }
-        return false
-    }
-    
-    var newFlight = ""
-    private func checkNewFlight(_ text: String) -> Bool {
-        if isNewFlightChecked {
-            return true
-        } else {
-            if text == "MU5515" || text == "MU5517" || text == "MU5519" {
-                newFlight = text
-                isNewFlightChecked = true
+            if text == "确认" || text == "确定" || text == "是" || text == "是的"{
+                isRefundInfoChecked = true
                 return true
             }
         }

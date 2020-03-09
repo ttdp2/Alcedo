@@ -16,6 +16,12 @@ func sockets(_ app: Application) throws {
     let flightController = FlightController()
     app.webSocket("flight", onUpgrade: flightController.handleFlight)
     
+    let flightChangeController = FlightChangeController()
+    app.webSocket("flightChange", onUpgrade: flightChangeController.handleFlightChange)
+    
+    let refundController = RefundController()
+    app.webSocket("refund", onUpgrade: refundController.handleRefund)
+    
     app.webSocket("member") { req, ws in
         let welcome =
         """

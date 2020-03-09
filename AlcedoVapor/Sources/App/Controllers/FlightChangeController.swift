@@ -1,13 +1,13 @@
 //
-//  FlightController.swift
+//  FlightChangeController.swift
 //  App
 //
-//  Created by Tian Tong on 2020/2/23.
+//  Created by Tian Tong on 3/9/20.
 //
 
 import Vapor
 
-class FlightController {
+class FlightChangeController {
     
     let welcome =
     """
@@ -27,23 +27,44 @@ class FlightController {
     let bookedMessgae = "经查询您有以上未出行航班，请选择需要改签的，或回复航班号"
     
     var availableFlights = [
-        Flight(depCity: "上海虹桥", arrCity: "青岛流亭", depTime: "14:35", arrTime: "16:10", flightDate: "2020-03-02", flightNo: "MU5515"),
-        Flight(depCity: "上海虹桥", arrCity: "青岛流亭", depTime: "18:00", arrTime: "19:35", flightDate: "2020-03-02", flightNo: "MU5517"),
-        Flight(depCity: "上海虹桥", arrCity: "青岛流亭", depTime: "21:15", arrTime: "22:55", flightDate: "2020-03-02", flightNo: "MU5519")
+        Flight(depCity: "上海虹桥", arrCity: "北京首都", depTime: "09:00", arrTime: "11:20", flightDate: "2020-03-10", flightNo: "MU5103"),
+        Flight(depCity: "上海虹桥", arrCity: "北京首都", depTime: "13:00", arrTime: "15:20", flightDate: "2020-03-10", flightNo: "MU5111"),
+        Flight(depCity: "上海虹桥", arrCity: "北京首都", depTime: "15:00", arrTime: "17:15", flightDate: "2020-03-10", flightNo: "MU5115")
     ]
     let availableMessage = "经查询有以上航班可供改签，请选择，或回复航班号"
     
-    private var isOptionChecked = false
-    private var isIdCardChecked = false
-    private var isFlightChecked = false
+    private var isOptionChecked = true
+    private var isIdCardChecked = true
+    private var isFlightChecked = true
     private var isNewDateChecked = false
     private var isNewFlightChecked = false
     private var isCompleted = false
     
     private var isManualModel = false
     
-    func handleFlight(req: Request, ws: WebSocket) {
-        ws.send(welcome)
+    func handleFlightChange(req: Request, ws: WebSocket) {
+        let userInfo =
+              """
+              旅客信息：
+              姓名：胡歌  票号：781-123456789
+              航班号：MU5111   联系方式：13912345678
+              起飞：上海虹桥   到达：北京首都
+              """
+              ws.send(userInfo)
+              
+              let chatHistory =
+              """
+              IVR意图：不正常航班改期
+              IVR聊天记录：
+              ---------------------------------------
+              AI：您好，我是小东，有什么能帮您的？
+              旅客：我的航班延误了，我要改期
+              AI：已识别您为不正常航班改期，你可以在在线客服自助办理机票改期。
+              """
+        
+              ws.send(chatHistory)
+        
+        ws.send("请问您想改期到什么时间？")
         
         ws.onText { _, text in
             print("USER INPUT: \(text)")
@@ -86,9 +107,9 @@ class FlightController {
     }
     
     func reset() {
-        isOptionChecked = false
-        isIdCardChecked = false
-        isFlightChecked = false
+        isOptionChecked = true
+        isIdCardChecked = true
+        isFlightChecked = true
         isNewDateChecked = false
         isNewFlightChecked = false
         flightNo = ""
@@ -136,6 +157,16 @@ class FlightController {
             
             ws.send(raw: data, opcode: .binary)
             ws.send(availableMessage)
+            return
+        }
+        
+        guard checkFlightConfirmed(text) else {
+            guard let data = try? JSONEncoder().encode(availableFlights.last) else {
+                return
+            }
+            
+            ws.send(raw: data, opcode: .binary)
+            ws.send("请确认您要改期到的航班信息")
             return
         }
         
@@ -200,13 +231,8 @@ class FlightController {
         if isNewDateChecked {
             return true
         } else {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            if let _ = formatter.date(from: text){
-                newDate = text
-                availableFlights = availableFlights.map {
-                    Flight(depCity: $0.depCity, arrCity: $0.arrCity, depTime: $0.depTime, arrTime: $0.arrTime, flightDate: newDate, flightNo: $0.flightNo)
-                }
+            if text.contains("明天") {
+                newDate = "2020-03-10"
                 isNewDateChecked = true
                 return true
             }
@@ -219,7 +245,7 @@ class FlightController {
         if isNewFlightChecked {
             return true
         } else {
-            if text == "MU5515" || text == "MU5517" || text == "MU5519" {
+            if text == "MU5103" || text == "MU5111" || text == "MU5115" {
                 newFlight = text
                 isNewFlightChecked = true
                 return true
@@ -228,4 +254,19 @@ class FlightController {
         return false
     }
     
+    var isFlightConfirmed = false
+    private func checkFlightConfirmed(_ text: String) -> Bool {
+        if isFlightConfirmed {
+            return true
+        } else {
+            if text == "确认" {
+                isFlightConfirmed = true
+                return true
+            }
+        }
+        
+        return false
+    }
+    
 }
+
